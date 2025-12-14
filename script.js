@@ -60,19 +60,21 @@ categorySelect.addEventListener("change", (e) => {
 const grid = document.getElementById("participantsGrid");
 
 function renderParticipants(count) {
-  participantsGrid.innerHTML = "";
+  grid.innerHTML = "";
   for (let i = 1; i <= count; i++) {
-    participantsGrid.insertAdjacentHTML("beforeend", `
+    grid.insertAdjacentHTML("beforeend", `
+      <div class="participant">
+        <input type="text" name="member${i}Name" placeholder="Member ${i} Name" required>
+      </div>
       <div class="participant">
         <input type="text"
-               name="member${i}Name"
-               placeholder="Member ${i} Name"
+               name="member${i}SUC"
+               placeholder="Member ${i} SUC (10 chars)"
+               minlength="10"
+               maxlength="10"
                required>
       </div>
     `);
-  }
-}
-
   }
 }
 
@@ -121,4 +123,3 @@ document.getElementById("registrationForm").addEventListener("submit", async (e)
     submitBtn.textContent = "Submit Registration";
   }
 });
-

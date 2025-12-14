@@ -368,10 +368,11 @@ form select:focus {
 
 /* Participants grid */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  display: flex;
+  flex-direction: column;
   gap: 12px;
 }
+
 
 .participant {
   animation: fadeUp 0.3s ease forwards;
@@ -544,6 +545,7 @@ document.addEventListener("visibilitychange", () => {
     bgVideo.play();
   }
 });
+
 
 
 

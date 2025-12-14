@@ -362,6 +362,11 @@ form h4 {
   margin-bottom: 12px;
 }
 
+/* Remove extra spacing ONLY inside members grid */
+#participantsGrid input {
+  margin-bottom: 0;
+}
+
 
 form input:focus,
 form select:focus {
@@ -550,6 +555,7 @@ document.addEventListener("visibilitychange", () => {
     bgVideo.play();
   }
 });
+
 
 
 

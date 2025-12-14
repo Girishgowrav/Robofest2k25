@@ -342,23 +342,26 @@ h1, h2, h3, h4 {
 /* =========================
    FORMS
 ========================= */
-form h4 {
-  margin: 20px 0 10px;
-  font-size: 1rem;
-}
+/* ===== FORM SPACING FIX ===== */
 
 form input,
 form select {
   width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 14px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  font-size: 0.9rem;
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(6px);
-
+  padding: 14px 16px;
+  margin-bottom: 14px; /* IMPORTANT */
+  border-radius: 14px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: rgba(255,255,255,0.85);
 }
+
+/* Section spacing */
+form h4 {
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
 
 form input:focus,
 form select:focus {
@@ -545,6 +548,7 @@ document.addEventListener("visibilitychange", () => {
     bgVideo.play();
   }
 });
+
 
 
 

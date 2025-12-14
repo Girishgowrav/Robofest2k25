@@ -82,6 +82,20 @@ categorySelect.addEventListener("change", e => {
   renderParticipants(parseInt(e.target.value));
 });
 
+const agreeRules = document.getElementById("agreeRules");
+
+const form = document.getElementById("registrationForm");
+const submitButton = form.querySelector("button[type='submit']");
+
+// Disable submit initially
+submitButton.disabled = true;
+
+agreeRules.addEventListener("change", () => {
+  submitButton.disabled = !agreeRules.checked;
+});
+
+
+
 // ===== FORM SUBMIT =====
 document.getElementById("registrationForm").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -119,4 +133,5 @@ document.getElementById("registrationForm").addEventListener("submit", async (e)
     submitBtn.textContent = "Submit Registration";
   }
 });
+
 

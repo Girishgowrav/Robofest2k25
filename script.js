@@ -1,35 +1,24 @@
-/* =========================
-   SMART NAVBAR SCROLL
-========================= */
+// ===== NAVBAR SCROLL =====
 let lastScroll = 0;
 const navbar = document.getElementById("navbar");
 
 window.addEventListener("scroll", () => {
   const y = window.scrollY;
-  if (y > 80 && y > lastScroll) {
-    navbar.classList.add("show");
-  } else {
-    navbar.classList.remove("show");
-  }
+  if (y > 80 && y > lastScroll) navbar.classList.add("show");
+  else navbar.classList.remove("show");
   lastScroll = y;
 });
 
-/* =========================
-   SCROLL REVEAL
-========================= */
+// ===== SCROLL REVEAL =====
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add("show");
   });
 }, { threshold: 0.15 });
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-/* =========================
-   HAMBURGER MENU
-========================= */
+// ===== HAMBURGER =====
 const hamburger = document.getElementById("hamburger");
 const navLinks = document.getElementById("navLinks");
 
@@ -37,36 +26,43 @@ hamburger.addEventListener("click", () => {
   navLinks.classList.toggle("open");
 });
 
-/* =========================
-   FAQ ACCORDION
-========================= */
+// ===== FAQ ACCORDION =====
 document.querySelectorAll(".faq-q").forEach(q => {
   q.addEventListener("click", () => {
-    q.parentElement.classList.toggle("active");
+    const item = q.parentElement;
+    item.classList.toggle("active");
   });
 });
 
-/* =========================
-   REGISTRATION LOGIC
-========================= */
+
+// ===== DYNAMIC PARTICIPANTS =====
 const categorySelect = document.getElementById("teamCategory");
-const participantsGrid = document.getElementById("participantsGrid");
+
 const feeNote = document.getElementById("feeNote");
 
-/* Fee text */
 function updateFeeText(value) {
   if (value === "3") {
     feeNote.textContent = "Single Team: 3 members – ₹800 per member";
+    feeNote.style.color = "red";
   } else {
     feeNote.textContent = "Double Team: 6 members – ₹700 per member";
+    feeNote.style.color = "red";
   }
 }
 
-/* Render participant inputs */
+// Initial fee text
+updateFeeText(categorySelect.value);
+
+categorySelect.addEventListener("change", (e) => {
+  updateFeeText(e.target.value);
+});
+
+const grid = document.getElementById("participantsGrid");
+
 function renderParticipants(count) {
-  participantsGrid.innerHTML = "";
+  grid.innerHTML = "";
   for (let i = 1; i <= count; i++) {
-    participantsGrid.insertAdjacentHTML("beforeend", `
+    grid.insertAdjacentHTML("beforeend", `
       <div class="participant">
         <input type="text" name="member${i}Name" placeholder="Member ${i} Name" required>
       </div>
@@ -82,18 +78,15 @@ function renderParticipants(count) {
   }
 }
 
-/* Initial load */
-updateFeeText(categorySelect.value);
-renderParticipants(parseInt(categorySelect.value));
+
+// Initial load (3 members)
+renderParticipants(3);
 
 categorySelect.addEventListener("change", e => {
-  updateFeeText(e.target.value);
   renderParticipants(parseInt(e.target.value));
 });
 
-/* =========================
-   FORM SUBMISSION (GOOGLE SHEETS)
-========================= */
+// ===== FORM SUBMIT =====
 document.getElementById("registrationForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -105,8 +98,7 @@ document.getElementById("registrationForm").addEventListener("submit", async (e)
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
 
-  const scriptURL =
-    "https://script.google.com/macros/s/AKfycbxFQf1K5cwMkaobVmTFGfmNqziQvlqvD_4xnEkB1KKL4FDfdW-xxhM80CLbcapcyebK9Q/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwQ4DvQuW_UzVsatb2FIlsrFefkvuao4uWcxKjUhRWWJYj3p4y5FtRPJYWOIw3mbw_Ekw/exec";
 
   try {
     const response = await fetch(scriptURL, {
@@ -124,10 +116,9 @@ document.getElementById("registrationForm").addEventListener("submit", async (e)
       submitBtn.disabled = false;
       submitBtn.textContent = "Submit Registration";
     }
-
   } catch (error) {
-    console.error(error);
     alert("Network error. Please try again.");
+    console.error(error);
     submitBtn.disabled = false;
     submitBtn.textContent = "Submit Registration";
   }

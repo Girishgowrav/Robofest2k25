@@ -98,7 +98,7 @@ document.getElementById("registrationForm").addEventListener("submit", async (e)
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
 
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwQ4DvQuW_UzVsatb2FIlsrFefkvuao4uWcxKjUhRWWJYj3p4y5FtRPJYWOIw3mbw_Ekw/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxFQf1K5cwMkaobVmTFGfmNqziQvlqvD_4xnEkB1KKL4FDfdW-xxhM80CLbcapcyebK9Q/exec";
 
   try {
     const response = await fetch(scriptURL, {
@@ -123,3 +123,4 @@ document.getElementById("registrationForm").addEventListener("submit", async (e)
     submitBtn.textContent = "Submit Registration";
   }
 });
+

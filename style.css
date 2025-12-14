@@ -378,8 +378,8 @@ form select:focus {
 .grid {
   display: flex;
   flex-direction: column;
-  gap: 14px; /* space between members */
-  margin-top: 16px;
+  gap: 14px;
+  margin-top: 0;
 }
 
 
@@ -555,6 +555,7 @@ document.addEventListener("visibilitychange", () => {
     bgVideo.play();
   }
 });
+
 
 
 
